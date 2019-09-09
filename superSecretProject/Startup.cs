@@ -38,6 +38,8 @@ namespace superSecretProject
 
             var connection = @"Server=PEDRO\SQLEXPRESS;Database=db_ssproject;User Id=sa; Password = Spectro@123;";
             services.AddDbContext<Context>(options => options.UseSqlServer(connection));
+
+            services.AddCors();
         }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,9 +54,10 @@ namespace superSecretProject
                 app.UseHsts();
             }
 
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
-            app.UseCors("MyPolicy");
+            
             }
     }
 }
