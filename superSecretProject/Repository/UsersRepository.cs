@@ -53,5 +53,13 @@ namespace superSecretProject.Repository
                 return context.Users.Where(x => x.Email == email).FirstOrDefault();
             }
         }
+
+        public Users GetUser(string email, string password)
+        {
+            using (Context context = new Context())
+            {
+                return context.Users.Where(x => x.Email == email && x.Senha == password).FirstOrDefault();
+            }
+        }
     }
 }

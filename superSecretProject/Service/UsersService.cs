@@ -22,7 +22,7 @@ namespace superSecretProject.Service
         {
             UsersRepository repository = new UsersRepository();
 
-            Users userEmail = repository.GetUsersEmail(email);
+            Users userEmail = repository.GetUser(email, password);
 
             return userEmail;
         }
