@@ -51,14 +51,14 @@ namespace superSecretProject.Service
 
                 AutenticacaoService AuthsService = new AutenticacaoService();
                 var auth = item.AutenticacaoId;
-                var aut = AuthsService.VerificaAutenticacao(auth.ToString());
+                var aut = AuthsService.VerificaAutenticacaoDisp(auth.ToString());
 
-                if (aut != null)
+                if (aut)
                 {
 
                     //Gerar novo ID
                     item.Id = Guid.NewGuid();
-                    item.AutenticacaoId = aut.Id;
+                    //item.AutenticacaoId = aut.Id;
                     item.Password = repository.MD5Encrypt(item.Password);
                     repository.Add(item);
 
@@ -120,6 +120,22 @@ namespace superSecretProject.Service
             {
                 throw new Exception("Usuário não encontrado.");
             }
+        }
+        public bool Email(string email)
+        {
+
+            UsersRepository repository = new UsersRepository();
+
+            if (repository.GetUserEmail(email) != null)
+            {
+
+                repository.SendEmail(email);
+
+                return true;
+
+            }
+
+            return false;
         }
     }
 }

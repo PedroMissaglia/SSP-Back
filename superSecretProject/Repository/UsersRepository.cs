@@ -140,5 +140,75 @@ namespace superSecretProject.Repository
             cryptoStream.Close();
             return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount).TrimEnd("\0".ToCharArray());
         }
+        //Função auxiliar para gerar string aleatório (útil)
+        public string RandomString()
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 0; i < 5; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+
+            return builder.ToString();
+        }
+        //Função para envio de e-mail
+        public void SendEmail(string email)
+        {
+
+            string emailAlex = "alexandriateste1@gmail.com";
+            string passAlex = "Spectro@123";
+            string newPassword = RandomString();
+            //var contentID = "Image";
+            //var inlineLogo = new Attachment(@"C://Alexandria/Assign.png");
+            string nomeUser = GetUserEmail(email).Name;
+            string htmlBody;
+            string url = "http://localhost:4000/?id=" + GetUserEmail(email).Id;
+
+            MailMessage mail = new MailMessage();
+
+            mail.IsBodyHtml = true;
+            htmlBody = CreateBody(nomeUser, url);
+
+
+            mail.From = new MailAddress(emailAlex);
+            mail.To.Add(email); // para
+            mail.Subject = "Alexandria - Nova Senha"; // assunto
+            mail.Body += htmlBody;
+
+
+            using (var smtp = new SmtpClient("smtp.gmail.com"))
+            {
+                smtp.EnableSsl = true; // GMail requer SSL
+                smtp.Port = 587;       // porta para SSL
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network; // modo de envio
+                smtp.UseDefaultCredentials = false; // vamos utilizar credencias especificas
+
+                // seu usuário e senha para autenticação
+                smtp.Credentials = new NetworkCredential(emailAlex, passAlex);
+
+                // envia o e-mail
+                smtp.Send(mail);
+
+            }
+        }
+        private string CreateBody(string nameUsuario, string url)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader("C://Alexandria/PedroMissaglia/Alexandria.API/wwwroot/teste.html"))
+            {
+
+                body = reader.ReadToEnd();
+
+            }
+            body = body.Replace("{fname}", nameUsuario);
+            body = body.Replace("{furl}", url);
+
+
+            return body;
+
+        }
     }
 }

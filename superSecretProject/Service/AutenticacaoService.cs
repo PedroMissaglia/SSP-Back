@@ -9,19 +9,17 @@ namespace superSecretProject.Service
 {
     public class AutenticacaoService
     {
-        public Autenticacao VerificaAutenticacao(String Aut)
+        public bool VerificaAutenticacaoDisp(String Aut)
         {
             AutenticacaoRepository repository = new AutenticacaoRepository();
 
-            var Auth = repository.GetAutNumero(Aut);
-
-            if (Auth != null)
+            if (repository.GetAutNumero(Aut) != null)
             {
-                return Auth;
+                return false;
             }
             else
             {
-                throw new Exception("Autenticaçaõ Inválida.");
+                return true;
             }
 
         }

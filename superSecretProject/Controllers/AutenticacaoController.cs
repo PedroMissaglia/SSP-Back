@@ -22,7 +22,7 @@ namespace superSecretProject.Controllers
             {
                 AutenticacaoService AuthsService = new AutenticacaoService();
 
-                AuthsService.VerificaAutenticacao(auth.Numero);
+                AuthsService.VerificaAutenticacaoDisp(auth.Numero);
 
                 return Ok();
             }
@@ -41,12 +41,12 @@ namespace superSecretProject.Controllers
                 AutenticacaoService AuthsService = new AutenticacaoService();
 
                 //Busca usuario por email e senha
-                var aut = AuthsService.VerificaAutenticacao(auth.Numero);
+                var aut = AuthsService.VerificaAutenticacaoDisp(auth.Numero);
 
                 //Caso achar retorna 200 e o usuario
-                if (aut != null)
+                if (aut)
                 {
-                    IdDTO usuId = new IdDTO(aut.Id);
+                    IdDTO usuId = new IdDTO(auth.Id);
                     return Ok(usuId);
                 }
                 else

@@ -84,5 +84,21 @@ namespace superSecretProject.Controllers
 
 
         }
+        [HttpPost("forgotPassword")]
+        public IActionResult SendEmail([FromBody]EmailDTO Email)
+        {
+            try
+            {
+                UsersService userservice = new UsersService();
+
+                userservice.Email(Email.Email);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
