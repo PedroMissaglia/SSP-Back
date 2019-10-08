@@ -19,10 +19,34 @@ namespace superSecretProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("superSecretProject.Model.Autenticacao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nivel")
+                        .IsRequired();
+
+                    b.Property<string>("Numero")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Autenticacao");
+                });
+
             modelBuilder.Entity("superSecretProject.Model.Users", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("AutenticacaoId")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Birthdate");
+
+                    b.Property<string>("CPF")
+                        .IsRequired();
 
                     b.Property<string>("Email")
                         .IsRequired();
@@ -30,15 +54,22 @@ namespace superSecretProject.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("Senha")
-                        .IsRequired();
-
-                    b.Property<string>("Tipo")
+                    b.Property<string>("Password")
                         .IsRequired();
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AutenticacaoId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("superSecretProject.Model.Users", b =>
+                {
+                    b.HasOne("superSecretProject.Model.Autenticacao")
+                        .WithMany("Users")
+                        .HasForeignKey("AutenticacaoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

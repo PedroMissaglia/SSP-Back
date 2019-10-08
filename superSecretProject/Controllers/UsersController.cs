@@ -16,15 +16,28 @@ namespace superSecretProject.Controllers
     public class UsersController : ControllerBase
     {
         [HttpPost("signup")]
-        public IActionResult SignUpUser([FromBody]Users users)
+        public IActionResult SignUpUser([FromBody]Users user)
         {
             try
             {
-                UsersService usersService = new UsersService();
+                UsersService userservice = new UsersService();
 
-                usersService.VerificaEmail(users);
+                userservice.AddUser(user);
 
-                return Ok();
+                var usu = userservice.GetUserEmail(user.Email);
+
+
+                //Caso achar retorna 200 e o usuario
+                if (usu != null)
+                {
+                    IdDTO usuId = new IdDTO(usu.Id);
+                    return Ok(usuId);
+                }
+                else
+                {
+                    return StatusCode(422);
+                    //caso contrario retorna 412
+                }
             }
             catch (Exception e)
             {

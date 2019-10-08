@@ -11,7 +11,9 @@ namespace superSecretProject.Repository
     {
        public DbSet<Users> Users { get; set; }
 
-       public Context(DbContextOptions<Context> options) : base(options)
+       public DbSet<Autenticacao> Autenticacao { get; set; }
+
+        public Context(DbContextOptions<Context> options) : base(options)
         {
 
         }
@@ -24,7 +26,7 @@ namespace superSecretProject.Repository
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //String de Conexão do DB
-            optionsBuilder.UseSqlServer(@"Server=PEDRO\SQLEXPRESS;Database=db_ssproject;User Id=sa; Password = Spectro@123;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-G38B1L8\DEV2014;Database=VisionDB;User Id=sa; Password = Wagner231214!;");
         }
     }
 }

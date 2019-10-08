@@ -13,20 +13,28 @@ namespace superSecretProject.Model
         [JsonProperty("id")]
         public Guid Id { get; set; }
         [Required]
-        [JsonProperty("nome")]
+        [JsonProperty("name")]
         public string Name { get; set; }
+
+        [Required]
+        [JsonProperty("cpf")]
+        public string CPF { get; set; }
+
+        [Required]
+        [JsonProperty("birthdate")]
+        public DateTime Birthdate { get; set; }
 
         [Required]
         [JsonProperty("email")]
         public string Email { get; set; }
 
-        [Required]
-        [JsonProperty("senha")]
-        public string Senha { get; set; }
+
+        [JsonProperty("autenticacaoId")]
+        public Guid? AutenticacaoId { get; set; }
 
         [Required]
-        [JsonProperty("tipo")]
-        public string Tipo { get; set; }
+        [JsonProperty("password")]
+        public string Password { get; set; }
 
 
     }
