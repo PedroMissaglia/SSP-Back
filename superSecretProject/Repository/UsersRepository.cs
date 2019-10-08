@@ -63,7 +63,7 @@ namespace superSecretProject.Repository
         {
             using (Context context = new Context())
             {
-                return context.Users.Where(x => x.Email == email && x.Password == password).FirstOrDefault();
+                return context.Users.Where(x => x.Email == email && MD5Decrypt(x.Password) == password).FirstOrDefault();
             }
         }
 

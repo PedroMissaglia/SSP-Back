@@ -41,7 +41,7 @@ namespace superSecretProject.Service
 
             var userEmail = repository.GetUserEmail(item.Email);
 
-            if (userEmail == null)
+            if (userEmail != null)
             {
                 throw new Exception("User alredy exists");
 
