@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace superSecretProject.Model
 {
-    public class Autenticacao
+    public class Token
     {
-        public Autenticacao()
+        public Token()
         {
             Users = new HashSet<Users>();
         }
@@ -22,7 +22,7 @@ namespace superSecretProject.Model
         public string Numero { get; set; }
 
         [Required]
-        [JsonProperty("Nivel")]
+        [JsonProperty("nivel")]
         public string Nivel { get; set; }
 
         public virtual ICollection<Users> Users { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Alexandria.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
 using superSecretProject.Model;
 using superSecretProject.Model.DTO;
@@ -15,6 +16,8 @@ namespace superSecretProject.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+
+        //Método para Adicionar Usuário
         [HttpPost("signup")]
         public IActionResult SignUpUser([FromBody]Users user)
         {
@@ -45,6 +48,8 @@ namespace superSecretProject.Controllers
                 throw e;
             }
         }
+
+        //Método para acesso ao sistema.
         [HttpPost("login")]
         public IActionResult LoginAsCommonUser([FromBody]UserDTO user)
         {
@@ -81,9 +86,9 @@ namespace superSecretProject.Controllers
 
                 throw e;
             }
-
-
         }
+
+        //Método para recuperação da senha
         [HttpPost("forgotPassword")]
         public IActionResult SendEmail([FromBody]EmailDTO Email)
         {
@@ -100,5 +105,38 @@ namespace superSecretProject.Controllers
                 throw e;
             }
         }
+
+        //Método para alterar os dados do usuário
+        [HttpPost("updateUsers/{usersid}")]
+        public IActionResult UpdateUsers([FromRoute]Guid userid, [FromBody]UsersUpdateDTO users)
+        {
+            try
+            {
+                UsersService userservice = new UsersService();
+
+                if (userservice.GetUserId(userid) != null)
+                {
+                    if (userservice.UpdateUsers(userid, users))
+                    {
+                        var usu = userservice.GetUserId(userid);
+
+                        return Ok(usu);
+                    }
+                    return StatusCode(412);
+                }
+
+                else
+                {
+                    return StatusCode(405);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+        }
     }
+
 }

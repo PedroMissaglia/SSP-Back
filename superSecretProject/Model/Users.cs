@@ -29,8 +29,8 @@ namespace superSecretProject.Model
         public string Email { get; set; }
 
 
-        [JsonProperty("autenticacaoId")]
-        public Guid? AutenticacaoId { get; set; }
+        [JsonProperty("tokenId")]
+        public Guid TokenId { get; set; }
 
         [Required]
         [JsonProperty("password")]

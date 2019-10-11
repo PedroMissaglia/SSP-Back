@@ -11,17 +11,17 @@ namespace Alexandria.Model.DTO
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("birthdate")]
-        public DateTime Birthdate { get; set; }
-
-        [JsonProperty("gender")]
-        public string Gender { get; set; }
-
         [JsonProperty("cpf")]
         public string CPF { get; set; }
 
+        [JsonProperty("birthdate")]
+        public DateTime Birthdate { get; set; }
+
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        [JsonProperty("TokenId")]
+        public Guid TokenId { get; set; }
 
     }
 }

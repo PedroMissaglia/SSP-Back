@@ -81,7 +81,7 @@ namespace superSecretProject.Repository
                     user.CPF = item.CPF;
                     user.Email = item.Email;
                     user.Password = MD5Encrypt(item.Password);
-                    user.AutenticacaoId = item.AutenticacaoId;
+                    user.TokenId = item.TokenId;
 
 
                     context.Update(user);

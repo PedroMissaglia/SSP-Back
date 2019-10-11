@@ -13,16 +13,16 @@ namespace superSecretProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AutenticacaoController : ControllerBase
+    public class TokenController : ControllerBase
     {
         [HttpPost("auth")]
-        public IActionResult Auth([FromBody]Autenticacao auth)
+        public IActionResult Auth([FromBody]Token auth)
         {
             try
             {
-                AutenticacaoService AuthsService = new AutenticacaoService();
+                TokenService AuthsService = new TokenService();
 
-                AuthsService.VerificaAutenticacaoDisp(auth.Numero);
+                AuthsService.GetTokenDisp(auth.Numero);
 
                 return Ok();
             }
@@ -34,20 +34,22 @@ namespace superSecretProject.Controllers
         }
 
         [HttpPost("addauth")]
-        public IActionResult AddAuth([FromBody]Autenticacao auth)
+        public IActionResult AddAuth([FromBody]Token auth)
         {
             try
             {
-                AutenticacaoService AuthsService = new AutenticacaoService();
+                TokenService AuthsService = new TokenService();
 
-                //Busca usuario por email e senha
-                var aut = AuthsService.VerificaAutenticacaoDisp(auth.Numero);
+                AuthsService.AddToken(auth);
+
+                var aut = AuthsService.GetTokenDisp (auth.Numero);
+
 
                 //Caso achar retorna 200 e o usuario
-                if (aut)
+                if (aut != null)
                 {
-                    IdDTO usuId = new IdDTO(auth.Id);
-                    return Ok(usuId);
+                    IdDTO autId = new IdDTO(aut.Id);
+                    return Ok(autId);
                 }
                 else
                 {
@@ -60,8 +62,7 @@ namespace superSecretProject.Controllers
 
                 throw e;
             }
-
-
         }
+                
     }
 }

@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace superSecretProject.Migrations
 {
-    public partial class Teste1 : Migration
+    public partial class teste1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Autenticacao",
+                name: "Token",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -17,7 +17,7 @@ namespace superSecretProject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Autenticacao", x => x.Id);
+                    table.PrimaryKey("PK_Token", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -29,24 +29,24 @@ namespace superSecretProject.Migrations
                     CPF = table.Column<string>(nullable: false),
                     Birthdate = table.Column<DateTime>(nullable: false),
                     Email = table.Column<string>(nullable: false),
-                    AutenticacaoId = table.Column<Guid>(nullable: false),
+                    TokenId = table.Column<Guid>(nullable: false),
                     Password = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Autenticacao_AutenticacaoId",
-                        column: x => x.AutenticacaoId,
-                        principalTable: "Autenticacao",
+                        name: "FK_Users_Token_TokenId",
+                        column: x => x.TokenId,
+                        principalTable: "Token",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_AutenticacaoId",
+                name: "IX_Users_TokenId",
                 table: "Users",
-                column: "AutenticacaoId");
+                column: "TokenId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -55,7 +55,7 @@ namespace superSecretProject.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Autenticacao");
+                name: "Token");
         }
     }
 }

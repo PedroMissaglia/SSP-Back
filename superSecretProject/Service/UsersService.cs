@@ -49,16 +49,16 @@ namespace superSecretProject.Service
             else
             {
 
-                AutenticacaoService AuthsService = new AutenticacaoService();
-                var auth = item.AutenticacaoId;
-                var aut = AuthsService.VerificaAutenticacaoDisp(auth.ToString());
+                TokenService AuthsService = new TokenService();
+                var auth = item.TokenId;
+                var aut = AuthsService.GetTokenDisp(auth.ToString());
 
-                if (aut)
+                if (aut != null)
                 {
 
                     //Gerar novo ID
                     item.Id = Guid.NewGuid();
-                    //item.AutenticacaoId = aut.Id;
+                    item.TokenId = aut.Id;
                     item.Password = repository.MD5Encrypt(item.Password);
                     repository.Add(item);
 
@@ -110,6 +110,10 @@ namespace superSecretProject.Service
                 {
                     user.Birthdate = item.Birthdate;
                 }
+                if (!(item.TokenId == Guid.Empty) && item.TokenId != user.TokenId)
+                {
+                    user.TokenId = item.TokenId;
+                }
 
                 user.Password = repository.MD5Decrypt(user.Password);
 
@@ -137,5 +141,15 @@ namespace superSecretProject.Service
 
             return false;
         }
+
+        //Método para retornar o Usuário pelo Id
+        public Users GetUserId(Guid id)
+        {
+            UsersRepository userRepository = new UsersRepository();
+
+            var user = userRepository.GetItem(id);
+            return user;
+        }
+
     }
 }

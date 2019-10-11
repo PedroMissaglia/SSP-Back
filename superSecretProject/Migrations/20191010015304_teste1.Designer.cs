@@ -10,8 +10,8 @@ using superSecretProject.Repository;
 namespace superSecretProject.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191008014944_Teste1")]
-    partial class Teste1
+    [Migration("20191010015304_teste1")]
+    partial class teste1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace superSecretProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("superSecretProject.Model.Autenticacao", b =>
+            modelBuilder.Entity("superSecretProject.Model.Token", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -34,16 +34,13 @@ namespace superSecretProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Autenticacao");
+                    b.ToTable("Token");
                 });
 
             modelBuilder.Entity("superSecretProject.Model.Users", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("AutenticacaoId")
-                        .IsRequired();
 
                     b.Property<DateTime>("Birthdate");
 
@@ -59,18 +56,20 @@ namespace superSecretProject.Migrations
                     b.Property<string>("Password")
                         .IsRequired();
 
+                    b.Property<Guid>("TokenId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AutenticacaoId");
+                    b.HasIndex("TokenId");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("superSecretProject.Model.Users", b =>
                 {
-                    b.HasOne("superSecretProject.Model.Autenticacao")
+                    b.HasOne("superSecretProject.Model.Token")
                         .WithMany("Users")
-                        .HasForeignKey("AutenticacaoId")
+                        .HasForeignKey("TokenId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

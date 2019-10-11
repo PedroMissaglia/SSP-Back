@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace superSecretProject.Repository
 {
-    public class AutenticacaoRepository : ICRUD<Autenticacao>
+    public class TokenRepository : ICRUD<Token>
     {
-        public void Add(Autenticacao item)
+        public void Add(Token item)
         {
             using (Context context = new Context())
             {
-                context.Autenticacao.Add(item);
+                context.Token.Add(item);
                 context.SaveChanges();
             }
            
@@ -23,26 +23,26 @@ namespace superSecretProject.Repository
             throw new NotImplementedException();
         }
 
-        public Autenticacao GetItem(Guid id)
+        public Token GetItem(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Autenticacao> GetItens()
+        public List<Token> GetItens()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Guid id, Autenticacao item)
+        public void Update(Guid id, Token item)
         {
             throw new NotImplementedException();
         }
 
-        public Autenticacao GetAutNumero(string autenticacao)
+        public Token GetAutNumero(string Token)
         {
             using (Context context = new Context())
             {
-                return context.Autenticacao.Where(x => x.Numero == autenticacao).FirstOrDefault();
+                return context.Token.Where(x => x.Numero == Token).FirstOrDefault();
             }
 
         }
