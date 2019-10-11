@@ -108,17 +108,17 @@ namespace superSecretProject.Controllers
 
         //Método para alterar os dados do usuário
         [HttpPost("updateUsers/{usersid}")]
-        public IActionResult UpdateUsers([FromRoute]Guid userid, [FromBody]UsersUpdateDTO users)
+        public IActionResult UpdateUsers([FromRoute]Guid usersid, [FromBody]UsersUpdateDTO users)
         {
             try
             {
                 UsersService userservice = new UsersService();
 
-                if (userservice.GetUserId(userid) != null)
+                if (userservice.GetUserId(usersid) != null)
                 {
-                    if (userservice.UpdateUsers(userid, users))
+                    if (userservice.UpdateUsers(usersid, users))
                     {
-                        var usu = userservice.GetUserId(userid);
+                        var usu = userservice.GetUserId(usersid);
 
                         return Ok(usu);
                     }

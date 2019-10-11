@@ -110,9 +110,20 @@ namespace superSecretProject.Service
                 {
                     user.Birthdate = item.Birthdate;
                 }
-                if (!(item.TokenId == Guid.Empty) && item.TokenId != user.TokenId)
+                if (!(item.TokenId == Guid.Empty))
                 {
-                    user.TokenId = item.TokenId;
+                    TokenService AuthsService = new TokenService();
+
+                    var auth = item.TokenId;
+                    var aut = AuthsService.GetTokenDisp(auth.ToString());
+
+
+                    if (aut != null)
+                    {
+                        user.TokenId = aut.Id;
+                    }
+
+                        
                 }
 
                 user.Password = repository.MD5Decrypt(user.Password);
