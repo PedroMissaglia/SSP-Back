@@ -58,7 +58,7 @@ namespace superSecretProject.Controllers
                 UsersService UsersService = new UsersService();
 
                 //Busca usuario por email e senha
-                var usu = UsersService.Login(user.Email);
+                var usu = UsersService.GetUserbyEmail(user.Email);
                 object use = null;
 
 

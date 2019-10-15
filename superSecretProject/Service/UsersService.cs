@@ -27,20 +27,12 @@ namespace superSecretProject.Service
 
             return userEmail;
         }
-        public Users Login(string email)
+        public Users GetUserbyEmail(string email)
         {
             UsersRepository userRepository = new UsersRepository();
 
-            var user = userRepository.GetUserEmail(email);
-
-            if (user != null)
-            {
-                return user;
-            }
-            else
-            {
-                throw new Exception("Usuário Inválido!");
-            }
+            return userRepository.GetUserEmail(email);
+         
         }
 
         public void AddUser(Users item)
