@@ -32,7 +32,15 @@ namespace superSecretProject.Service
             UsersRepository userRepository = new UsersRepository();
 
             var user = userRepository.GetUserEmail(email);
-            return user;
+
+            if (user != null)
+            {
+                return user;
+            }
+            else
+            {
+                throw new Exception("Usuário Inválido!");
+            }
         }
 
         public void AddUser(Users item)
