@@ -165,7 +165,7 @@ namespace superSecretProject.Repository
             //var inlineLogo = new Attachment(@"C://Alexandria/Assign.png");
             string nomeUser = GetUserEmail(email).Name;
             string htmlBody;
-            string url = "http://localhost:4000/?id=" + GetUserEmail(email).Id;
+            string url = "http://localhost:3000/newPassword";
 
             MailMessage mail = new MailMessage();
 
@@ -175,7 +175,7 @@ namespace superSecretProject.Repository
 
             mail.From = new MailAddress(emailAlex);
             mail.To.Add(email); // para
-            mail.Subject = "Alexandria - Nova Senha"; // assunto
+            mail.Subject = "Vision - Nova Senha"; // assunto
             mail.Body += htmlBody;
 
 
@@ -197,7 +197,7 @@ namespace superSecretProject.Repository
         private string CreateBody(string nameUsuario, string url)
         {
             string body = string.Empty;
-            using (StreamReader reader = new StreamReader("C://Alexandria/PedroMissaglia/Alexandria.API/wwwroot/teste.html"))
+            using (StreamReader reader = new StreamReader("C://Users/pedro.missaglia/Documents/GitHub/SSP-Back/superSecretProject/wwwroot/teste.html"))
             {
 
                 body = reader.ReadToEnd();
