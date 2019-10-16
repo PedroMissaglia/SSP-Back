@@ -162,5 +162,23 @@ namespace superSecretProject.Service
             return user;
         }
 
+
+        public void UpdatePasswordUser(NewPasswordDTO item)
+        {
+            UsersRepository repository = new UsersRepository();
+            var userId = repository.GetItem(item.Id);
+
+            if (userId != null && item.New_Password.CompareTo(item.Confirm_Password) == 0)
+            {
+                userId.Password = item.Confirm_Password;
+                repository.Update(userId.Id, userId);
+            }
+            else
+            {
+                throw new Exception("Passwords do not match.");
+            }
+
+        }
+
     }
 }

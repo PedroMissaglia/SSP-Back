@@ -135,8 +135,26 @@ namespace superSecretProject.Controllers
                 throw e;
             }
 
-
         }
+
+        [HttpPost("newPassword")]
+        public IActionResult NewPassword([FromBody]NewPasswordDTO item)
+        {
+            try
+            {
+                UsersService usersservice = new UsersService();
+
+                usersservice.UpdatePasswordUser(item);
+
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 
 }
