@@ -155,6 +155,32 @@ namespace superSecretProject.Controllers
             }
         }
 
+        //Método para alterar os dados do usuário
+        [HttpPost("getUsers/{usersid}")]
+        public IActionResult GetUsers([FromRoute]Guid usersid)
+        {
+            try
+            {
+                UsersService userservice = new UsersService();
+
+                if (userservice.GetUserId(usersid) != null)
+                {
+                    var usu = userservice.GetUserId(usersid);
+
+                    return Ok(usu);
+                }
+                else
+                {
+                    return StatusCode(405);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
     }
 
 }
