@@ -106,6 +106,41 @@ namespace superSecretProject.Controllers
             }
         }
 
+        //Método para recuperação dO ID do usuário
+        [HttpPost("getIdUser")]
+        public IActionResult getIdUser([FromBody]EmailDTO item)
+        {
+            try
+            {
+                UsersService userservice = new UsersService();
+
+                var usu = userservice.GetUserbyEmail(item.Email);
+
+                //Caso achar retorna 200 e o usuario
+                if (usu != null)
+                {
+                    IdDTO usuId = new IdDTO(usu.Id);
+
+                        return Ok(usuId);
+                }
+                else
+                {
+
+                    return StatusCode(422);
+                    //caso contrario retorna 412
+
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        
+        }
+
+
+
         //Método para alterar os dados do usuário
         [HttpPost("updateUsers/{usersid}")]
         public IActionResult UpdateUsers([FromRoute]Guid usersid, [FromBody]UsersUpdateDTO users)
@@ -155,7 +190,28 @@ namespace superSecretProject.Controllers
             }
         }
 
-        //Método para alterar os dados do usuário
+        
+        [HttpPost("newPasswordByProfile")]
+        public IActionResult NewPassword([FromBody]NewPasswordByProfileDTO item)
+        {
+            try
+            {
+                UsersService usersservice = new UsersService();
+
+
+
+                usersservice.UpdatePasswordByProfile(item);
+
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        //Método para consultar os dados do usuário
         [HttpPost("getUsers/{usersid}")]
         public IActionResult GetUsers([FromRoute]Guid usersid)
         {

@@ -180,5 +180,42 @@ namespace superSecretProject.Service
 
         }
 
+        
+        public void UpdatePasswordByProfile(NewPasswordByProfileDTO item)
+        {
+            UsersRepository repository = new UsersRepository();
+            var userId = repository.GetItem(item.Id);
+
+            if (userId != null ) 
+            {
+                var pass = repository.MD5Decrypt(userId.Password);
+
+                if (item.Atl_Password == pass ) 
+                {
+                    if (item.New_Password.CompareTo(item.Confirm_Password) == 0)
+                    {
+                        userId.Password = item.Confirm_Password;
+                        repository.Update(userId.Id, userId);
+                    }
+                    else
+                    {
+                        throw new Exception("Passwords do not match.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Password previuos do not match.");
+                }
+
+            }
+            else
+            {
+                throw new Exception("User not found.");
+            }
+
+        }
+
+
+
     }
 }

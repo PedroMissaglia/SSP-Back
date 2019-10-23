@@ -197,10 +197,10 @@ namespace superSecretProject.Repository
         private string CreateBody(string nameUsuario, string url)
         {
             string body = string.Empty;
-            using (StreamReader reader = new StreamReader("C://Users/pedro.missaglia/Documents/GitHub/SSP-Back/superSecretProject/wwwroot/teste.html"))
+            using (StreamReader reader = new StreamReader("C://Users/sujeira/Documents/GitHub/SSP-Back/superSecretProject/wwwroot/teste.html"))
             {
 
-                body = reader.ReadToEnd();
+                  body = reader.ReadToEnd();
 
             }
             body = body.Replace("{fname}", nameUsuario);
