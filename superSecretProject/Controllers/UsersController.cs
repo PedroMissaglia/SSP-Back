@@ -212,7 +212,7 @@ namespace superSecretProject.Controllers
         }
 
         //Método para consultar os dados do usuário
-        [HttpPost("getUsers/{usersid}")]
+        [HttpGet("getUsers/{usersid}")]
         public IActionResult GetUsers([FromRoute]Guid usersid)
         {
             try
@@ -236,7 +236,6 @@ namespace superSecretProject.Controllers
             }
 
         }
-
     }
 
 }
