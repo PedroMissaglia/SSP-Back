@@ -9,10 +9,6 @@ namespace superSecretProject.Model
 {
     public class Tasks
     {
-        public Tasks()
-        {
-            Users = new HashSet<Users>();
-        }
 
         [JsonProperty("id")]
         public Guid Id { get; set; }
@@ -23,16 +19,10 @@ namespace superSecretProject.Model
 
         [Required]
         [JsonProperty("date")]
-        public DateTime date { get; set; }
-
-        [Required]
-        [JsonProperty("time")]
-        public DateTime time { get; set; }
-
+        public DateTime Date { get; set; }
 
         [JsonProperty("userId")]
-        public Guid userId { get; set; }
+        public Guid UserId { get; set; }
 
-        public virtual ICollection<Users> Users { get; set; }
     }
 }

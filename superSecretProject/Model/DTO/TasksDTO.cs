@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace superSecretProject.Model.DTO
 {
-    public class TasksDTO
+    public class UserDTO
     {
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("email")]
+        public string Email { get; set; }
 
-        [JsonProperty("date")]
-        public string Date { get; set; }
+        [JsonProperty("password")]
+        public string Password { get; set; }
 
     }
 }

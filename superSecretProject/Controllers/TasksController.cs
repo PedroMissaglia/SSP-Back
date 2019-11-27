@@ -20,7 +20,7 @@ namespace superSecretProject.Controllers
             {
                 TasksService TasksService = new TasksService();
 
-                if (TasksService.AddTask(task)){
+                if (TasksService.AddTask(task, usersid)){
                     return Ok();
                 }
                 return StatusCode(422);
@@ -29,6 +29,51 @@ namespace superSecretProject.Controllers
             catch (Exception e)
             {
 
+                throw e;
+            }
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Del_Task([FromRoute]Guid usersid, [FromBody]Tasks task)
+        {
+            try
+            {
+                TasksService TasksService = new TasksService();
+
+                if (TasksService.DelTask(task.Id, usersid))
+                {
+                    return Ok();
+                }
+                return StatusCode(422);
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        [HttpGet("list")]
+        public IActionResult List_Task([FromRoute]Guid usersid)
+        {
+            try
+            {
+                TasksService TasksService = new TasksService();
+
+                var task = TasksService.ListTask(usersid);
+               
+                if(task != null)
+                {
+                    return Ok(task);
+                }
+                else
+                {
+                    return StatusCode(422);
+                }
+            }
+            catch (Exception e)
+            {
                 throw e;
             }
         }

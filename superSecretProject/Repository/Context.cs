@@ -13,6 +13,8 @@ namespace superSecretProject.Repository
 
        public DbSet<Token> Token { get; set; }
 
+        public DbSet<Tasks> Tasks { get; set; }
+
         public Context(DbContextOptions<Context> options) : base(options)
         {
 

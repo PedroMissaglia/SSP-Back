@@ -19,12 +19,32 @@ namespace superSecretProject.Repository
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var tasks = GetItem(id);
+
+            using (Context context = new Context())
+            {
+                if (tasks != null)
+                {
+                    context.Tasks.Remove(tasks);
+                    context.SaveChanges();
+                }
+            }
         }
 
         public Tasks GetItem(Guid id)
         {
-            throw new NotImplementedException();
+            using (Context context = new Context())
+            {
+                return context.Tasks.Where(x => x.Id == id).FirstOrDefault();
+            }
+        }
+
+        public List<Tasks> GetListTask(Guid id)
+        {
+            using (Context context = new Context())
+            {
+                return context.Tasks.Where(x => x.UserId == id).ToList();
+            }
         }
 
         public List<Tasks> GetItens()
@@ -34,7 +54,20 @@ namespace superSecretProject.Repository
 
         public void Update(Guid id, Tasks item)
         {
-            throw new NotImplementedException();
+            var task = GetItem(id);
+
+            using (Context context = new Context())
+            {
+                if (task != null)
+                {
+
+                    task.Name = item.Name;
+                    task.Date = item.Date;
+
+                    context.Update(task);
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }

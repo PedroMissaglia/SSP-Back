@@ -9,7 +9,12 @@ namespace superSecretProject.Model
 {
     public class Users
     {
-        
+
+        public Users()
+        {
+            Tasks = new HashSet<Tasks>();
+        }
+
         [JsonProperty("id")]
         public Guid Id { get; set; }
         [Required]
@@ -36,6 +41,7 @@ namespace superSecretProject.Model
         [JsonProperty("password")]
         public string Password { get; set; }
 
+        public virtual ICollection<Tasks> Tasks { get; set; }
 
     }
 }
