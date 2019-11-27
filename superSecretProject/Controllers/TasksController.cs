@@ -13,7 +13,7 @@ namespace superSecretProject.Controllers
     [ApiController]
     public class TasksController : ControllerBase
     {
-        [HttpPost("add")]
+        [HttpPost("add/{usersid}")]
         public IActionResult Add_Task([FromRoute]Guid usersid, [FromBody]Tasks task)
         {
             try
@@ -54,7 +54,7 @@ namespace superSecretProject.Controllers
             }
         }
 
-        [HttpGet("list")]
+        [HttpGet("list/{usersid}")]
         public IActionResult List_Task([FromRoute]Guid usersid)
         {
             try

@@ -22,6 +22,7 @@ namespace superSecretProject.Service
 
                 //Gerar novo ID
                 task.Id = Guid.NewGuid();
+                task.UsersId = id;
                 repository.Add(task);
 
 
@@ -67,7 +68,7 @@ namespace superSecretProject.Service
                 return false;
             }
         }
-        
+
         public List<Tasks> ListTask(Guid id)
         {
             UsersService userservice = new UsersService();
@@ -77,7 +78,7 @@ namespace superSecretProject.Service
             if (Usertasks != null)
             {
                 TasksRepository repository = new TasksRepository();
-                
+
                 return repository.GetListTask(id);
 
             }
@@ -87,6 +88,7 @@ namespace superSecretProject.Service
             }
 
         }
+
 
     }
 }

@@ -43,9 +43,10 @@ namespace superSecretProject.Repository
         {
             using (Context context = new Context())
             {
-                return context.Tasks.Where(x => x.UserId == id).ToList();
+                return context.Tasks.Where(x => x.UsersId == id).ToList();
             }
         }
+
 
         public List<Tasks> GetItens()
         {

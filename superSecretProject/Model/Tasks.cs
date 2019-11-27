@@ -9,7 +9,7 @@ namespace superSecretProject.Model
 {
     public class Tasks
     {
-
+        
         [JsonProperty("id")]
         public Guid Id { get; set; }
    
@@ -21,8 +21,11 @@ namespace superSecretProject.Model
         [JsonProperty("date")]
         public DateTime Date { get; set; }
 
-        [JsonProperty("userId")]
-        public Guid UserId { get; set; }
+        [JsonProperty("usersId")]
+        public Guid UsersId { get; set; }
+        
+
+        
 
     }
 }

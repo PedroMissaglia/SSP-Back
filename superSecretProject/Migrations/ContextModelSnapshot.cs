@@ -19,6 +19,25 @@ namespace superSecretProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("superSecretProject.Model.Tasks", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<Guid>("UsersId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("Tasks");
+                });
+
             modelBuilder.Entity("superSecretProject.Model.Token", b =>
                 {
                     b.Property<Guid>("Id")
@@ -61,6 +80,14 @@ namespace superSecretProject.Migrations
                     b.HasIndex("TokenId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("superSecretProject.Model.Tasks", b =>
+                {
+                    b.HasOne("superSecretProject.Model.Users")
+                        .WithMany("Tasks")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("superSecretProject.Model.Users", b =>
