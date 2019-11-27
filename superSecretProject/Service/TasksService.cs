@@ -89,6 +89,46 @@ namespace superSecretProject.Service
 
         }
 
+        public Boolean UpdateTasks(Guid id, Tasks item)
+        {
+            UsersRepository repository = new UsersRepository();
+
+            var user = repository.GetItem(id);
+
+            if (user != null)
+            {
+                TasksRepository taskrepository = new TasksRepository();
+
+                var task = taskrepository.GetItem(item.Id);
+
+                if (task != null)
+                {
+                    if (task.UsersId == id)
+                    {
+                        task.Name = item.Name;
+                        task.Date = item.Date;
+                        taskrepository.Update(id, task);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+                else
+                {
+                    return false;
+                }
+
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
     }
 }

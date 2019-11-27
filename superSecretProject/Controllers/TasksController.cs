@@ -33,7 +33,7 @@ namespace superSecretProject.Controllers
             }
         }
 
-        [HttpPost("delete")]
+        [HttpPost("delete/{usersid}")]
         public IActionResult Del_Task([FromRoute]Guid usersid, [FromBody]Tasks task)
         {
             try
@@ -74,6 +74,27 @@ namespace superSecretProject.Controllers
             }
             catch (Exception e)
             {
+                throw e;
+            }
+        }
+
+        [HttpPost("upd/{usersid}")]
+        public IActionResult Upd_Task([FromRoute]Guid usersid, [FromBody]Tasks task)
+        {
+            try
+            {
+                TasksService TasksService = new TasksService();
+
+                if (TasksService.UpdateTasks(usersid, task))
+                {
+                    return Ok();
+                }
+                return StatusCode(422);
+
+            }
+            catch (Exception e)
+            {
+
                 throw e;
             }
         }
