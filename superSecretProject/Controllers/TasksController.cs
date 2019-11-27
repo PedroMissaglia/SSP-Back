@@ -34,7 +34,7 @@ namespace superSecretProject.Controllers
         }
 
         [HttpPost("delete/{usersid}")]
-        public IActionResult Del_Task([FromRoute]Guid usersid, [FromBody]Guid taskid)
+        public IActionResult Del_Task([FromRoute]Guid usersid, [FromBody]IdDTO taskid)
         {
             try
             {

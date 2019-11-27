@@ -1,4 +1,5 @@
 ﻿using superSecretProject.Model;
+using superSecretProject.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,14 @@ namespace superSecretProject.Repository
             }
         }
 
+        public Tasks GetItemDto(IdDTO id)
+        {
+            using (Context context = new Context())
+            {
+                return context.Tasks.Where(x => x.Id == id.Id).FirstOrDefault();
+            }
+        }
+
         public List<Tasks> GetListTask(Guid id)
         {
             using (Context context = new Context())
@@ -55,7 +64,7 @@ namespace superSecretProject.Repository
 
         public void Update(Guid id, Tasks item)
         {
-            var task = GetItem(id);
+            var task = GetItem(item.Id);
 
             using (Context context = new Context())
             {

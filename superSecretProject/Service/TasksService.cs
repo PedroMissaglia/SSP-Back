@@ -42,9 +42,11 @@ namespace superSecretProject.Service
         }
 
 
-        public bool DelTask(Guid taskId, Guid id)
+        public bool DelTask(IdDTO iddto, Guid id)
         {
             TasksRepository repository = new TasksRepository();
+
+            var taskId = iddto.Id;
 
             var tasks = repository.GetItem(taskId);
 
